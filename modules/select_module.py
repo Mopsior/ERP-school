@@ -5,7 +5,7 @@ from modules.admin import admin
 from modules.pos import pos
 from utils.get_available_options import get_available_options
 from utils.int_input import int_input
-from utils.terminal import write, clear_screen, move_cursor, from_bottom, clear_line, move_up
+from utils.terminal import write, clear_screen, move_cursor, from_bottom
 
 
 def select_module():
