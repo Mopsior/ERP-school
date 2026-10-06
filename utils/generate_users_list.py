@@ -7,7 +7,8 @@ from utils.terminal import clear_screen, move_cursor, write
 def default_json_dump(path: Path):
     users = [{
         "name": "admin",
-        "password": "admin"
+        "password": "admin",
+        "role": "admin"
     }]
 
     with open(path, "w", encoding="utf-8") as f:

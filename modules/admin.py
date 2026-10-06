@@ -1,9 +1,9 @@
 import os
 
-from classes import menu_option
 from classes.menu_option import MenuOption
 from components.tabs import tabs
-from utils.chars import invert_text, vertical_line, horizontal_line, top_connector, bottom_right, bottom_left
+from components.user_table import user_table
+from utils.get_users import get_users
 from utils.terminal import clear_screen, move_cursor, write
 
 
@@ -18,3 +18,11 @@ def admin():
 
     tabs(tab_options)
     move_cursor(3)
+
+    users = get_users()
+    if not users: raise FileNotFoundError
+
+    user_table(users, 5)
+
+    move_cursor(columns)
+    input()
