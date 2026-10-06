@@ -6,6 +6,11 @@ top_right = '┐'
 top_left = "┌"
 bottom_right = '┘'
 bottom_left = '└'
+join_left = '├'
+join_right = '┤'
+join_top = '┬'
+join_bottom = '┴'
+intersection = '┼'
 
 
 start_invert = '\033[7m'
