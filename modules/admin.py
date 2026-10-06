@@ -18,13 +18,3 @@ def admin():
 
     tabs(tab_options)
     move_cursor(3)
-
-    # move_cursor(1)
-    # write(' ')
-    # write(invert_text('UŻYTKOWNICY'))
-    # write(f' {vertical_line} ')
-    # write('Druga zakładka')
-    # write(f' {vertical_line} ')
-    # move_cursor(2)
-    # write(horizontal_line*13 + top_connector + horizontal_line*16 + bottom_right)
-    # move_cursor(3)

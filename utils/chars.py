@@ -11,6 +11,6 @@ bottom_left = '└'
 start_invert = '\033[7m'
 end_invert = '\033[27m'
 
-def invert_text(content: str | None):
-    if content is None: return None
+def invert_text(content: str | None) -> str:
+    if content is None: return ""
     return start_invert + content + end_invert

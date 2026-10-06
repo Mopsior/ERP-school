@@ -4,7 +4,7 @@ from utils.terminal import move_cursor, write
 
 
 def tabs(options: list[MenuOption]):
-    first_line:str = " "
+    first_line: str = " "
     second_line: str = ""
 
     for i, option in enumerate(options):
