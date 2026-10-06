@@ -1,0 +1,13 @@
+db/
+
+# Pliki edytora
+.venv/
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+pycache/
+*.py[cod]
+*$py.class
+**/__pycache__/
