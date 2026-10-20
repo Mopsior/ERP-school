@@ -5,12 +5,15 @@ from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
 from components.tabs import tabs
 from components.user_table import user_table
+from modules.user_details import user_details
 from utils.get_available_options import get_available_options
 from utils.get_users import get_users
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
 
 def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
+    users = get_users()
+    if not users: raise FileNotFoundError
 
     input_mode_options = [
         MenuOption('Zakładkę', lambda: admin(AdminInputMode.TABS)),
@@ -23,13 +26,12 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
         MenuOption('<- Wróć', admin, hidden_from_tabs=True)
     ]
 
-    page_options = [
-        MenuOption('Użytkownicy', admin),
-        MenuOption('<- Wróć', admin, hidden_from_tabs=True)
-    ]
+    page_options: list[MenuOption] = []
 
-    users = get_users()
-    if not users: raise FileNotFoundError
+    for i, user in enumerate(users):
+        page_options.append(MenuOption(user['name'], lambda: user_details(i)))
+
+    page_options.append(MenuOption('<- Wróć', admin, hidden_from_tabs=True))
 
     error_message: str | None = None
 
@@ -51,7 +53,6 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
             write(error_message)
 
         move_cursor(rows)
-
         write(f'Wprwoadź liczbę: ({get_available_options(len(size_source))}) ')
 
         user_input = None
