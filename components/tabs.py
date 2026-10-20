@@ -7,12 +7,14 @@ def tabs(options: list[MenuOption]):
     first_line: str = " "
     second_line: str = ""
 
-    for i, option in enumerate(options):
-        first_line += invert_text(options[i].name) if i is 0 else options[i].name
+    visible_options = [option for option in options if not option.hidden_from_tabs]
+
+    for i, option in enumerate(visible_options):
+        first_line += invert_text(visible_options[i].name) if i is 0 else visible_options[i].name
         first_line += f' {vertical_line} '
 
         second_line += horizontal_line * (len(option.name) + 2)
-        second_line += top_connector if i < (len(options) - 1) else bottom_right
+        second_line += top_connector if i < (len(visible_options) - 1) else bottom_right
 
     move_cursor(1)
     write(first_line),
