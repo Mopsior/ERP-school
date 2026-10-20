@@ -23,7 +23,6 @@ def user_details(user_id: int):
     write(f'Wybrano uzytkownikoa {selected_user['name']}')
 
     action_options = [
-        MenuOption('Dodaj', lambda: user_details(user_id)),
         MenuOption('Edytuj', lambda: user_details(user_id)),
         MenuOption('Usuń', lambda: remove_user(user_id)),
         MenuOption('<- Powrót', lambda : admin(AdminInputMode.PAGE_CONTENT))
