@@ -1,15 +1,16 @@
 from classes.user import User
 from utils.chars import top_left, horizontal_line, top_right, vertical_line, join_left, join_right, intersection, \
     join_top, join_bottom, bottom_right, bottom_left
+from utils.get_table_width import get_table_width
 from utils.terminal import move_cursor, write
 
 
-table_width = 48
-role_starting_width = table_width - 9
-# - 7 because 3 chars are decorators, 4 are spaces
-max_name_width = role_starting_width - 7
-
 def user_table(data: list[User], starting_row: int):
+    table_width = get_table_width()
+    role_starting_width = table_width - 9
+    # - 7 because 3 chars are decorators, 4 are spaces
+    max_name_width = role_starting_width - 7
+
     move_cursor(starting_row)
     write(top_left + horizontal_line * (table_width - 2 ) + top_right)
 
