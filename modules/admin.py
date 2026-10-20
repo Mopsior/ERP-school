@@ -5,6 +5,7 @@ from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
 from components.tabs import tabs
 from components.user_table import user_table
+from modules.create_user import create_user
 from modules.user_details import user_details
 from utils.get_available_options import get_available_options
 from utils.get_users import get_users
@@ -31,7 +32,8 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
     for i, user in enumerate(users):
         page_options.append(MenuOption(user['name'], lambda: user_details(i - 1)))
 
-    page_options.append(MenuOption('<- Wróć', admin, hidden_from_tabs=True))
+    page_options.append(MenuOption('+ Dodaj użytkownika', create_user))
+    page_options.append(MenuOption('<- Wróć', admin))
 
     error_message: str | None = None
 
@@ -43,7 +45,12 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
 
         user_table(users, 3)
 
-        size_source = {AdminInputMode.SELECTING: input_mode_options, AdminInputMode.TABS: tab_options, AdminInputMode.PAGE_CONTENT: page_options}.get(input_mode)
+        size_source = {
+            AdminInputMode.SELECTING: input_mode_options,
+            AdminInputMode.TABS: tab_options,
+            AdminInputMode.PAGE_CONTENT: page_options
+        }.get(input_mode)
+
         move_cursor(from_bottom(rows, len(size_source) + 1))
         write('Wybierz:')
         bottom_nav_list(size_source, rows)
