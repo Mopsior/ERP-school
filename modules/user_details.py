@@ -7,6 +7,7 @@ from utils.get_available_options import get_available_options
 from utils.get_users import get_users
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
+from utils.remove_user import remove_user
 
 
 def user_details(user_id: int):
@@ -24,7 +25,7 @@ def user_details(user_id: int):
     action_options = [
         MenuOption('Dodaj', lambda: user_details(user_id)),
         MenuOption('Edytuj', lambda: user_details(user_id)),
-        MenuOption('Usuń', lambda: user_details(user_id)),
+        MenuOption('Usuń', lambda: remove_user(user_id)),
         MenuOption('<- Powrót', lambda : admin(AdminInputMode.PAGE_CONTENT))
     ]
 
