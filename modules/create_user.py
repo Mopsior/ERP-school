@@ -65,11 +65,10 @@ def create_user():
             input_method = lambda: user_role_input(user_roles_list)
             move_cursor(rows)
             write(f'Wprwoadź liczbę: ({get_available_options(len(user_roles_list))}) ')
-
         elif user_data_input_method is UserDataInputMethod.PASSWORD:
             error_row = 3
             move_cursor(from_bottom(rows, 1))
-            write("Wprowadź hasło użytkownika")
+            write("Wprowadź hasło użytkownika:")
             input_method = user_password_input
             move_cursor(rows)
 

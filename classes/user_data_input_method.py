@@ -4,3 +4,4 @@ class UserDataInputMethod(Enum):
     NAME = 'name',
     ROLE = 'role',
     PASSWORD = 'password'
+    CONFIRMATION = 'save'

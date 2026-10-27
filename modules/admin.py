@@ -30,7 +30,7 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
     page_options: list[MenuOption] = []
 
     for i, user in enumerate(users):
-        page_options.append(MenuOption(user['name'], lambda: user_details(i - 1)))
+        page_options.append(MenuOption(user['name'], lambda i=i: user_details(i)))
 
     page_options.append(MenuOption('+ Dodaj użytkownika', create_user))
     page_options.append(MenuOption('<- Wróć', admin))

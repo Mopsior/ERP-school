@@ -1,3 +1,8 @@
-def int_input(content: str | None = None):
+def int_input(content: str | None = None) -> int | None:
     prompt = "" if content is None else content
-    return int(input(prompt))
+
+    value = input(prompt)
+    if not value:
+        return None
+
+    return int(value)
