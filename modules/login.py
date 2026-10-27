@@ -3,7 +3,7 @@ from typing import Callable
 
 from classes.login_mode import LoginMode
 from classes.user_role import UserRole
-from utils.get_users import get_users
+from utils.admin.get_users import get_users
 from utils.terminal import clear_screen, write, move_cursor, from_bottom
 
 

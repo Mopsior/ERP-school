@@ -4,17 +4,17 @@ from classes.menu_option import MenuOption
 from classes.user_data_input_method import UserDataInputMethod
 from classes.user_role import UserRole
 from components.bottom_nav_list import bottom_nav_list
-from utils.edit_user import edit_user
+from utils.admin.edit_user import edit_user
 from utils.get_available_options import get_available_options
-from utils.get_role_index import get_role_index
-from utils.get_users import get_users
+from utils.admin.get_role_index import get_role_index
+from utils.admin.get_users import get_users
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
-from utils.user_data_inputs import user_name_input, user_role_input, user_confirmation_input
+from utils.admin.user_data_inputs import user_name_input, user_role_input, user_confirmation_input
 from classes.user import User
 
 
 def update_user(user_id: int):
-    from modules.user_details import user_details
+    from modules.admin.user_details import user_details
 
     users = get_users()
     if not users: raise FileNotFoundError

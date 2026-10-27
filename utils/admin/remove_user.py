@@ -1,12 +1,12 @@
 import json
 
 from classes.input_mode import AdminInputMode
-from utils.get_users import get_users
-from utils.get_users_list_path import get_users_list_path
+from utils.admin.get_users import get_users
+from utils.admin.get_users_list_path import get_users_list_path
 
 
 def remove_user(user_id: int):
-    from modules.admin import admin
+    from modules.admin.admin import admin
     users = get_users()
     if not users: raise FileNotFoundError
 

@@ -1,7 +1,7 @@
 import json
 import os
 
-from utils.get_users_list_path import get_users_list_path
+from utils.admin.get_users_list_path import get_users_list_path
 from utils.terminal import move_cursor, write
 from classes.user import User
 

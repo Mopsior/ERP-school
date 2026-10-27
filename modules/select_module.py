@@ -3,7 +3,7 @@ import os
 from classes.login_mode import LoginMode
 from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
-from modules.admin import admin
+from modules.admin.admin import admin
 from modules.login import login
 from modules.pos import pos
 from utils.get_available_options import get_available_options

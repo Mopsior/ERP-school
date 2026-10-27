@@ -5,10 +5,11 @@ from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
 from components.tabs import tabs
 from components.user_table import user_table
-from modules.create_user import create_user
-from modules.user_details import user_details
+from modules.admin.create_user import create_user
+from modules.admin.products import products_list
+from modules.admin.user_details import user_details
 from utils.get_available_options import get_available_options
-from utils.get_users import get_users
+from utils.admin.get_users import get_users
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
 
@@ -22,8 +23,8 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
     ]
 
     tab_options = [
-        MenuOption('Użytkownicy', admin),
-        MenuOption('Druga zakładka', admin),
+        MenuOption('Użytkownicy', admin, selected=True),
+        MenuOption('Produkty', products_list),
         MenuOption('<- Wróć', admin, hidden_from_tabs=True)
     ]
 
