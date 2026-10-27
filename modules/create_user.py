@@ -79,19 +79,19 @@ def create_user():
             error_message = str(e)
         else:
             if user_data_input_method is UserDataInputMethod.NAME:
-                error_message = 0
+                error_message = None
                 assert isinstance(user_input, str)
                 user_name = user_input
                 user_data_input_method = UserDataInputMethod.ROLE
                 continue
             elif user_data_input_method is UserDataInputMethod.ROLE:
-                error_message = 0
+                error_message = None
                 assert isinstance(user_input, UserRole)
                 user_role = user_input
                 user_data_input_method = UserDataInputMethod.PASSWORD
                 continue
             elif user_data_input_method is UserDataInputMethod.PASSWORD:
-                error_message = 0
+                error_message = None
                 assert isinstance(user_input, str)
                 assert isinstance(user_name, str)
                 assert isinstance(user_role, UserRole)
