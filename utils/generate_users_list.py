@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from utils.get_users_list_path import get_users_list_path
+from utils.admin.get_users_list_path import get_users_list_path
 from utils.terminal import clear_screen, move_cursor, write
 
 def default_json_dump(path: Path):

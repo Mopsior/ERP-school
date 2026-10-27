@@ -1,12 +1,12 @@
 import json
 
 from classes.user import User
-from utils.get_users import get_users
-from utils.get_users_list_path import get_users_list_path
+from utils.admin.get_users import get_users
+from utils.admin.get_users_list_path import get_users_list_path
 
 
 def edit_user(updated_user: User , user_id: int) -> None:
-    from modules.user_details import user_details
+    from modules.admin.user_details import user_details
 
     users = get_users()
     if not users: raise FileNotFoundError

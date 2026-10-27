@@ -3,16 +3,16 @@ import os
 from classes.input_mode import AdminInputMode
 from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
-from modules.update_user import update_user
+from modules.admin.update_user import update_user
 from utils.get_available_options import get_available_options
-from utils.get_users import get_users
+from utils.admin.get_users import get_users
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
-from utils.remove_user import remove_user
+from utils.admin.remove_user import remove_user
 
 
 def user_details(user_id: int):
-    from modules.admin import admin
+    from modules.admin.admin import admin
 
     users = get_users()
     if not users: raise FileNotFoundError

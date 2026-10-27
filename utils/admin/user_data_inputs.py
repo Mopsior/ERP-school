@@ -1,7 +1,7 @@
 from classes.menu_option import MenuOption
 from classes.user_role import UserRole
-from utils.config import required_symbols, required_numbers
-from utils.get_role_index import get_role_index
+from utils.config import required_symbols
+from utils.admin.get_role_index import get_role_index
 from utils.int_input import int_input
 
 

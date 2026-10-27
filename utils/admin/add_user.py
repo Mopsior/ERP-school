@@ -1,8 +1,8 @@
 import json
 
-from modules.user_details import user_details
-from utils.get_users import get_users
-from utils.get_users_list_path import get_users_list_path
+from modules.admin.user_details import user_details
+from utils.admin.get_users import get_users
+from utils.admin.get_users_list_path import get_users_list_path
 from classes.user import User
 
 
