@@ -3,6 +3,7 @@ import os
 from classes.input_mode import AdminInputMode
 from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
+from modules.update_user import update_user
 from utils.get_available_options import get_available_options
 from utils.get_users import get_users
 from utils.int_input import int_input
@@ -23,7 +24,7 @@ def user_details(user_id: int):
     write(f'Wybrano uzytkownikoa {selected_user['name']}')
 
     action_options = [
-        MenuOption('Edytuj', lambda: user_details(user_id)),
+        MenuOption('Edytuj', lambda: update_user(user_id)),
         MenuOption('Usuń', lambda: remove_user(user_id)),
         MenuOption('<- Powrót', lambda : admin(AdminInputMode.PAGE_CONTENT))
     ]
@@ -37,7 +38,7 @@ def user_details(user_id: int):
         move_cursor(1)
         write('Informacje o użytkowniku')
         move_cursor(3)
-        write(f'ID:     {user_id}')
+        write(f'ID:     {user_id + 1}')
         move_cursor(4)
         write(f'Nazwa:  {selected_user['name']}')
         move_cursor(5)
