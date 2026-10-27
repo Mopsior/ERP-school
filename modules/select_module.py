@@ -1,8 +1,10 @@
 import os
 
+from classes.login_mode import LoginMode
 from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
 from modules.admin import admin
+from modules.login import login
 from modules.pos import pos
 from utils.get_available_options import get_available_options
 from utils.int_input import int_input
@@ -11,8 +13,8 @@ from utils.terminal import write, clear_screen, move_cursor, from_bottom
 
 def select_module():
     options = [
-        MenuOption('POS', pos),
-        MenuOption('Panel Administracyjny', admin)
+        MenuOption('POS', lambda: login(LoginMode.WORKER, pos)),
+        MenuOption('Panel Administracyjny', lambda: login(LoginMode.ADMIN, admin))
     ]
 
     error_message: str | None = None
