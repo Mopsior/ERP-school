@@ -3,9 +3,12 @@ import os
 from classes.input_mode import AdminInputMode
 from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
+from components.empty import empty
 from components.products_table import products_table
 from components.tabs import tabs
+from modules.admin.product_details import product_details
 from utils.admin.get_products import get_products
+from utils.chars import invert_text
 from utils.get_available_options import get_available_options
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, from_bottom, write
@@ -15,7 +18,6 @@ def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
     from modules.admin.admin import admin
 
     products = get_products()
-    if not products: raise FileNotFoundError
 
     input_mode_options = [
         MenuOption('Zakładkę', lambda: products_list(AdminInputMode.TABS)),
@@ -30,11 +32,12 @@ def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
 
     page_options: list[MenuOption] = []
 
-    for i, product in enumerate(products):
-        page_options.append(MenuOption(product['name'], products_list))
+    if products:
+        for i, product in enumerate(products):
+            page_options.append(MenuOption(product['name'], lambda i=i: product_details(i)))
 
     page_options.append(MenuOption('+ Dodaj produkt', products_list))
-    page_options.append(MenuOption('<- Wróć', admin))
+    page_options.append(MenuOption('<- Wróć', products_list))
 
     error_message: str | None = None
 
@@ -44,7 +47,10 @@ def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
 
         tabs(tab_options)
 
-        products_table(products, 3)
+        if products:
+            products_table(products, 3)
+        else:
+            empty(3, "Nie ma jeszcze żadnego produktu. Stwórz nowy z opcji poniżej")
 
         size_source = {
             AdminInputMode.SELECTING: input_mode_options,
