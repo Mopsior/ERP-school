@@ -5,7 +5,7 @@ from utils.admin.get_users import get_users
 from utils.admin.get_users_list_path import get_users_list_path
 
 
-def edit_user(updated_user: User , user_id: int) -> None:
+def edit_user(updated_user: User, user_id: int) -> None:
     from modules.admin.user_details import user_details
 
     users = get_users()
