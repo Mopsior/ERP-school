@@ -4,6 +4,7 @@ from classes.input_mode import AdminInputMode
 from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
 from utils.admin.get_products import get_products
+from utils.admin.remove_product import remove_product
 from utils.get_available_options import get_available_options
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
@@ -18,7 +19,7 @@ def product_details(product_id: int):
 
     action_options = [
         MenuOption('Edytuj', lambda: product_details(product_id)),
-        MenuOption('Usuń', lambda: product_details(product_id)),
+        MenuOption('Usuń', lambda: remove_product(product_id)),
         MenuOption('<- Powrót', lambda : products_list(AdminInputMode.PAGE_CONTENT))
     ]
 
