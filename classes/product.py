@@ -1,6 +1,6 @@
 from typing import TypedDict
 
 
-class Products(TypedDict):
+class Product(TypedDict):
     name: str
-    price: int
+    price: float

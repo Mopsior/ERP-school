@@ -1,9 +1,9 @@
-from classes.products import Products
+from classes.product import Product
 from components.render_table import render_table
 from utils.get_table_width import get_table_width
 
 
-def products_table(data: list[Products], starting_row: int):
+def products_table(data: list[Product], starting_row: int):
     table_width = get_table_width()
     price_starting_width = table_width - 9
 

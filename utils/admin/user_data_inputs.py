@@ -12,7 +12,7 @@ def user_name_input(default_value: str | None = None) -> str:
     if len(user_input) <= 0:
         raise TypeError('Nazwa użytkownika jest za krótka')
 
-    if len(user_input) >= 64:
+    if len(user_input) > 64:
         raise TypeError('Nazwa użytkownika jest za długa')
 
     return user_input
@@ -29,7 +29,7 @@ def user_role_input(roles_list: list[MenuOption], default_value: UserRole | None
             return selected_option.data
 
         if user_input is None:
-                raise TypeError
+            raise TypeError
 
         if user_input <= 0:
             raise IndexError

@@ -36,7 +36,7 @@ def product_details(product_id: int):
         move_cursor(4)
         write(f'Nazwa:  {selected_product['name']}')
         move_cursor(5)
-        write(f'Cena:   {selected_product['price']}')
+        write(f'Cena:   {selected_product['price']:.2f}')
 
         move_cursor(from_bottom(rows, len(action_options) + 1))
         write('Wybierz akcję:')
