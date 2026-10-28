@@ -12,13 +12,14 @@ from utils.terminal import clear_screen, move_cursor, write, from_bottom
 
 def product_details(product_id: int):
     from modules.admin.products import products_list
+    from modules.admin.update_product import update_product
 
     products = get_products()
 
     selected_product = products[product_id]
 
     action_options = [
-        MenuOption('Edytuj', lambda: product_details(product_id)),
+        MenuOption('Edytuj', lambda: update_product(product_id)),
         MenuOption('Usuń', lambda: remove_product(product_id)),
         MenuOption('<- Powrót', lambda : products_list(AdminInputMode.PAGE_CONTENT))
     ]
