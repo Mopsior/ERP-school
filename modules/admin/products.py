@@ -6,9 +6,9 @@ from components.bottom_nav_list import bottom_nav_list
 from components.empty import empty
 from components.products_table import products_table
 from components.tabs import tabs
+from modules.admin.create_product import create_product
 from modules.admin.product_details import product_details
 from utils.admin.get_products import get_products
-from utils.chars import invert_text
 from utils.get_available_options import get_available_options
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, from_bottom, write
@@ -36,7 +36,7 @@ def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
         for i, product in enumerate(products):
             page_options.append(MenuOption(product['name'], lambda i=i: product_details(i)))
 
-    page_options.append(MenuOption('+ Dodaj produkt', products_list))
+    page_options.append(MenuOption('+ Dodaj produkt', create_product))
     page_options.append(MenuOption('<- Wróć', products_list))
 
     error_message: str | None = None
