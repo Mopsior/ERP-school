@@ -19,10 +19,6 @@ def user_details(user_id: int):
 
     selected_user = users[user_id]
 
-    clear_screen()
-    move_cursor(1)
-    write(f'Wybrano uzytkownikoa {selected_user['name']}')
-
     action_options = [
         MenuOption('Edytuj', lambda: update_user(user_id)),
         MenuOption('Usuń', lambda: remove_user(user_id)),
