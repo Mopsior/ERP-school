@@ -1,4 +1,5 @@
 from classes.menu_option import MenuOption
+from utils.config import min_product_price, max_product_price
 from utils.int_input import int_input
 
 
@@ -17,6 +18,10 @@ def product_name_input(default_value: str | None = None) -> str:
 def product_price_input(default_value: float | None = None) -> float:
     try:
         user_input = input().strip()
+        partitioned_input = user_input.replace(',', '.').partition('.')
+        if len(partitioned_input[2]) > 2:
+            user_input = partitioned_input[0] + partitioned_input[1] + partitioned_input[2][:2]
+
         user_input = default_value if default_value is not None and not user_input else user_input
 
         user_input = float(user_input)
@@ -26,6 +31,12 @@ def product_price_input(default_value: float | None = None) -> float:
 
         if user_input < 0:
             raise ValueError("Cena produktu jest za krótka")
+
+        if min_product_price is not None and user_input < min_product_price:
+            raise ValueError(f"Cena produktu jest zbyt niska. Minimalna cena to: {min_product_price}")
+
+        if max_product_price is not None and user_input > max_product_price:
+            raise ValueError(f'Cena produktu jest zbyt duża. Maksymalna cena to: {max_product_price}')
 
         return user_input
     except TypeError:
