@@ -5,7 +5,7 @@ from classes.menu_option import MenuOption
 from components.bottom_nav_list import bottom_nav_list
 from modules.admin.admin import admin
 from modules.login import login
-from modules.pos import pos
+from modules.pos.products import pos_products
 from utils.get_available_options import get_available_options
 from utils.int_input import int_input
 from utils.terminal import write, clear_screen, move_cursor, from_bottom
@@ -13,7 +13,7 @@ from utils.terminal import write, clear_screen, move_cursor, from_bottom
 
 def select_module():
     options = [
-        MenuOption('POS', lambda: login(LoginMode.WORKER, pos)),
+        MenuOption('POS', lambda: login(LoginMode.WORKER, pos_products)),
         MenuOption('Panel Administracyjny', lambda: login(LoginMode.ADMIN, admin))
     ]
 
