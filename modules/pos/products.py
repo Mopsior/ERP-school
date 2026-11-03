@@ -2,6 +2,7 @@ import os
 
 from classes.menu_option import MenuOption
 from classes.pos_input_mode import POSInputMode
+from classes.product import Product
 from components.bottom_nav_list import bottom_nav_list
 from components.empty import empty
 from components.products_table import products_table
@@ -27,11 +28,19 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
         MenuOption('<- Wróć', pos_products, hidden_from_tabs=True)
     ]
 
+    selected_products: list[Product] = []
+
+    def toggle_selected_product(value: Product):
+        if value in selected_products:
+            selected_products.remove(value)
+        else:
+            selected_products.append(value)
+
     page_options: list[MenuOption] = []
 
     if products:
         for i, product in enumerate(products):
-            page_options.append(MenuOption(product['name'], pos_products))
+            page_options.append(MenuOption(product['name'], lambda i=i: toggle_selected_product(products[i]), should_rerender=True))
 
     page_options.append(MenuOption('<- Wróć', pos_products))
 
@@ -43,8 +52,15 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
 
         tabs(tab_options)
 
+        summary_price: float = 0
+
+        for product in selected_products:
+            summary_price += product['price']
+
+        parsed_price = str(summary_price)
+
         if products:
-            products_table(products, 3)
+            products_table(products, 3, selected=selected_products, summary=parsed_price if summary_price else None)
         else:
             empty(3, "Nie ma jeszcze żadnego produktu. Skontaktuj się z właścicielem sklepu, aby dodał nowe")
 
@@ -55,7 +71,7 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
         }.get(input_mode)
 
         move_cursor(from_bottom(rows, len(size_source) + 1))
-        write('Wybierz:')
+        write('Wybierz, aby dodać do koszyka lub usunąć:')
         bottom_nav_list(size_source, rows)
 
         if error_message:
@@ -82,4 +98,4 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
             error_message = f'Nie ma opcji nr {user_input}'
         else:
             selected_option.execute()
-            break
+            if not selected_option.should_rerender: break
