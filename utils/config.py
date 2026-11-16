@@ -2,6 +2,7 @@
 
 user_list_file_path = 'db/users_list.json'
 products_list_file_path = 'db/products.json'
+promotions_list_file_path = 'db/promotions.json'
 required_numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 required_symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '=', '_', '+', '~', '[', ']', '{', '}', ';', ':', '"', '\'', '\\', '|' ,'<', '>', ',', '.', '/', '?']
 # optional settings. Set to None if you want to disable it

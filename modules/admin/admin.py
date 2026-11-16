@@ -7,6 +7,7 @@ from components.tabs import tabs
 from components.user_table import user_table
 from modules.admin.create_user import create_user
 from modules.admin.products import products_list
+from modules.admin.promotions import promotions_list
 from modules.admin.user_details import user_details
 from utils.get_available_options import get_available_options
 from utils.admin.get_users import get_users
@@ -25,6 +26,7 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
     tab_options = [
         MenuOption('Użytkownicy', admin, selected=True),
         MenuOption('Produkty', products_list),
+        MenuOption('Promocje', promotions_list),
         MenuOption('<- Wróć', admin, hidden_from_tabs=True)
     ]
 

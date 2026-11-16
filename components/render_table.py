@@ -15,6 +15,8 @@ def render_table(
     right_header: str,
     right_key: str,
     right_starting_width: int,
+    right_decorator: str | None = None,
+    right_with_precision: bool | None = True,
     selected: list | None = None,
     addon_row_header: str | None = None,
     addon_row_value: str | None = None
@@ -98,7 +100,8 @@ def render_table(
         value = item[right_key]
 
         if isinstance(value, (int, float)):
-            value = f"{value:.2f}"
+            value = f"{value:.2f}" if right_with_precision else f"{value}"
+            value += right_decorator or ""
 
         write(f"{vertical_line} {value}")
 
