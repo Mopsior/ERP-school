@@ -8,7 +8,6 @@ from components.empty import empty
 from components.products_table import products_table
 from components.tabs import tabs
 from utils.admin.get_products import get_products
-from utils.get_available_options import get_available_options
 from utils.int_input import int_input
 from utils.terminal import clear_screen, move_cursor, from_bottom, write
 
@@ -40,7 +39,7 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
 
     if products:
         for i, product in enumerate(products):
-            page_options.append(MenuOption(product['name'], lambda i=i: toggle_selected_product(products[i]), should_rerender=True))
+            page_options.append(MenuOption(product['name'], lambda i=i: toggle_selected_product(products[i]), should_rerender=True, hidden_from_list=True))
 
     page_options.append(MenuOption('<- Wróć', pos_products))
 
@@ -57,7 +56,7 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
         for product in selected_products:
             summary_price += product['price']
 
-        parsed_price = str(summary_price)
+        parsed_price = f"{summary_price:.2f}"
 
         if products:
             products_table(products, 3, selected=selected_products, summary=parsed_price if summary_price else None)
@@ -70,16 +69,17 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
             POSInputMode.PAGE_CONTENT: page_options
         }.get(input_mode)
 
-        move_cursor(from_bottom(rows, len(size_source) + 1))
-        write('Wybierz, aby dodać do koszyka lub usunąć:')
-        bottom_nav_list(size_source, rows)
+        bottom_list_length = bottom_nav_list(size_source, rows)
+
+        move_cursor(from_bottom(rows, bottom_list_length + 1))
+        write('Podaj numer produktu z tabeli lub wybierz opcję:')
 
         if error_message:
-            move_cursor(from_bottom(rows, len(size_source) + 3))
+            move_cursor(from_bottom(rows, bottom_list_length + 3))
             write(error_message)
 
         move_cursor(rows)
-        write(f'Wprwoadź liczbę: ({get_available_options(len(size_source))}) ')
+        write(f'Wprwoadź liczbę: ')
 
         user_input = None
         try:
