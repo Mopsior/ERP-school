@@ -16,6 +16,7 @@ from utils.terminal import clear_screen, move_cursor, from_bottom, write
 
 def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
     from modules.admin.admin import admin
+    from modules.admin.promotions import promotions_list
 
     products = get_products()
 
@@ -27,6 +28,7 @@ def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
     tab_options = [
         MenuOption('Użytkownicy', admin),
         MenuOption('Produkty', products_list, selected=True),
+        MenuOption('Promocje', promotions_list),
         MenuOption('<- Wróć', products_list, hidden_from_tabs=True)
     ]
 
