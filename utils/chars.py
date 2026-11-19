@@ -11,6 +11,8 @@ join_right = '┤'
 join_top = '┬'
 join_bottom = '┴'
 intersection = '┼'
+checkmark = '✓'
+crossmark = '✗'
 
 
 start_invert = '\033[7m'
