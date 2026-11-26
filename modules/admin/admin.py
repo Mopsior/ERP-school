@@ -25,7 +25,7 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
         MenuOption('Użytkownicy', admin, selected=True),
         MenuOption('Produkty', products_list),
         MenuOption('Promocje', promotions_list),
-        MenuOption('<- Wróć', admin, hidden_from_tabs=True)
+        MenuOption('<- Wróć', admin, hidden_from_tabs=True, is_return=True)
     ]
 
     page_options: list[MenuOption] = []
@@ -34,7 +34,7 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
         page_options.append(MenuOption(user['name'], lambda i=i: user_details(i)))
 
     page_options.append(MenuOption('+ Dodaj użytkownika', create_user))
-    page_options.append(MenuOption('<- Wróć', admin))
+    page_options.append(MenuOption('<- Wróć', admin, is_return=True))
 
     error_message: str | None = None
 
@@ -58,4 +58,3 @@ def admin(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
 
         if selected_option:
             selected_option.execute()
-            break

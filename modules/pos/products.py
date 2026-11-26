@@ -23,7 +23,7 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
         MenuOption('Produkty', pos_products, selected=True),
         MenuOption('Promocje', pos_products),
         MenuOption('Kody rabatowe', pos_products),
-        MenuOption('<- Wróć', pos_products, hidden_from_tabs=True)
+        MenuOption('<- Wróć', pos_products, hidden_from_tabs=True, is_return=True)
     ]
 
     selected_products: list[Product] = []
@@ -38,9 +38,13 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
 
     if products:
         for i, product in enumerate(products):
-            page_options.append(MenuOption(product['name'], lambda i=i: toggle_selected_product(products[i]), should_rerender=True, hidden_from_list=True))
+            page_options.append(MenuOption(product['name'], lambda i=i: toggle_selected_product(
+                    products[i]),
+                    should_rerender=True,
+                    hidden_from_list=True
+               ))
 
-    page_options.append(MenuOption('<- Wróć', pos_products))
+    page_options.append(MenuOption('<- Wróć', pos_products, is_return=True, hidden_from_list=True))
 
     error_message: str | None = None
 
