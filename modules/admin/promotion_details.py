@@ -5,6 +5,7 @@ from classes.menu_option import MenuOption
 from components.action_selection import action_selection
 from modules.admin.promotions import promotions_list
 from utils.admin.get_promotions import get_promotions
+from utils.admin.remove_promotion import remove_promotion
 from utils.chars import checkmark, crossmark
 from utils.terminal import clear_screen, move_cursor, write
 
@@ -15,7 +16,7 @@ def promotion_details(promotion_id: int):
 
     action_options = [
         MenuOption('Edytuj', lambda: promotion_details(promotion_id)),
-        MenuOption('Usuń', lambda: promotion_details(promotion_id)),
+        MenuOption('Usuń', lambda: remove_promotion(promotion_id)),
         MenuOption('<- Powrót', lambda : promotions_list(AdminInputMode.PAGE_CONTENT))
     ]
 
