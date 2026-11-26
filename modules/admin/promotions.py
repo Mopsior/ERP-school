@@ -14,6 +14,7 @@ def promotions_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING
     from modules.admin.admin import admin
     from modules.admin.products import products_list
     from modules.admin.promotion_details import promotion_details
+    from modules.admin.create_promotion import create_promotion
 
     promotions = get_promotions()
 
@@ -35,7 +36,7 @@ def promotions_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING
         for i, product in enumerate(promotions):
             page_options.append(MenuOption(product['name'], lambda i=i: promotion_details(i)))
 
-    page_options.append(MenuOption('+ Dodaj promocję', None))
+    page_options.append(MenuOption('+ Dodaj promocję', create_promotion))
     page_options.append(MenuOption('<- Wróć', products_list))
 
     error_message: str | None = None
