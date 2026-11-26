@@ -2,13 +2,11 @@ import os
 
 from classes.login_mode import LoginMode
 from classes.menu_option import MenuOption
-from components.bottom_nav_list import bottom_nav_list
+from components.action_selection import action_selection
 from modules.admin.admin import admin
 from modules.login import login
 from modules.pos.products import pos_products
-from utils.get_available_options import get_available_options
-from utils.int_input import int_input
-from utils.terminal import write, clear_screen, move_cursor, from_bottom
+from utils.terminal import write, clear_screen, move_cursor
 
 
 def select_module():
@@ -26,32 +24,10 @@ def select_module():
         write('System ERP')
         move_cursor(3)
         write('Wybierz odpowiedni moduł aplikacji:\n1. Wybierz liczbę z listy poniżej\n2. Naciśnij przycisk Enter')
-        move_cursor(from_bottom(rows, len(options) + 1))
-        write('Wybierz moduł:')
+        selected_option, error_message = action_selection(
+            options, rows, 'Wybierz moduł:', error_message
+        )
 
-        bottom_nav_list(options, rows)
-
-        if error_message:
-            move_cursor(from_bottom(rows, len(options) + 3))
-            write(error_message)
-
-        move_cursor(rows)
-        write(f'Wprwoadź liczbę: ({get_available_options(len(options))}) ')
-
-        try:
-            user_input = int_input(None)
-
-            if user_input is None:
-                raise TypeError
-
-            if user_input <= 0:
-                raise IndexError
-
-            selected_option = options[user_input - 1]
-        except (ValueError, TypeError):
-            error_message = 'To nie jest liczba! Wprowadź opcje ponownie'
-        except IndexError:
-            error_message = f'Nie ma opcji nr {user_input}'
-        else:
+        if selected_option:
             selected_option.execute()
             break

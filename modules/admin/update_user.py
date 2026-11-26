@@ -3,9 +3,8 @@ import os
 from classes.menu_option import MenuOption
 from classes.user_data_input_method import UserDataInputMethod
 from classes.user_role import UserRole
-from components.bottom_nav_list import bottom_nav_list
+from components.action_selection import action_selection
 from utils.admin.edit_user import edit_user
-from utils.get_available_options import get_available_options
 from utils.admin.get_role_index import get_role_index
 from utils.admin.get_users import get_users
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
@@ -74,19 +73,16 @@ def update_user(user_id: int):
                 write(f"({user['name']}): ")
             case UserDataInputMethod.ROLE:
                 error_row = len(user_roles_list) + 3
-                move_cursor(from_bottom(rows, len(user_roles_list) + 1))
-                write("Wprowadź rolę użytkownika:")
-                bottom_nav_list(user_roles_list, rows)
-                move_cursor(rows)
                 selected_role = get_role_index(user_roles_list, user['role'])
-                write(f'Wprwoadź liczbę: ({get_available_options(len(user_roles_list), selected_role)}) ')
+                action_selection(
+                    user_roles_list,
+                    rows,
+                    "Wprowadź rolę użytkownika:",
+                    selected_option=selected_role
+                )
             case UserDataInputMethod.CONFIRMATION:
                 error_row = len(confirmation_options) + 3
-                move_cursor(from_bottom(rows, len(confirmation_options) + 1))
-                write("Czy chcesz zapisać zmiany?")
-                bottom_nav_list(confirmation_options, rows)
-                move_cursor(rows)
-                write(f'Wprwoadź liczbę: ({get_available_options(len(confirmation_options))}) ')
+                action_selection(confirmation_options, rows, "Czy chcesz zapisać zmiany?")
 
         try:
             match user_data_input_method:
