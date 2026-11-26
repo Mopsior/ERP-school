@@ -79,7 +79,6 @@ def update_promotion(promotion_id: int):
                 write(f'({"tak" if promotion["active"] else "nie"}): ')
             case PromotionInputMethod.CONFIRMATION:
                 error_row = len(confirmation_options) + 3
-                action_selection(confirmation_options, rows, "Czy chcesz zapisać zmiany?")
 
         try:
             match promotion_input_method:
@@ -100,6 +99,9 @@ def update_promotion(promotion_id: int):
                         confirmation_options, rows, 'Wybierz akcję:', error_message
                     )
 
+                    if selected_option is None:
+                        continue
+
                     match selected_option.data:
                         case True:
                             assert isinstance(promotion_name, str)
@@ -113,6 +115,10 @@ def update_promotion(promotion_id: int):
                             )
 
                             edit_promotion(new_promotion, promotion_id)
+                        case False:
+                            from modules.admin.promotion_details import promotion_details
+
+                            promotion_details(promotion_id)
         except (TypeError, ValueError) as e:
             error_message = str(e)
         else:
