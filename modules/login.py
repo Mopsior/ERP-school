@@ -8,11 +8,12 @@ from utils.terminal import clear_screen, write, move_cursor, from_bottom
 
 
 def login(mode: LoginMode, redirect: Callable) -> None:
+    from modules.select_module import select_module
+
     users = get_users()
     if not users: raise FileNotFoundError
 
     user_name: str | None = None
-    user_password: str | None = None
 
     error_message: str | None = None
 
@@ -39,14 +40,22 @@ def login(mode: LoginMode, redirect: Callable) -> None:
 
         try:
             if not user_name:
-                write("Wpisz nazwę użytkownika:")
+                write("Wpisz nazwę użytkownika: (lub :q, aby wyjść)")
                 move_cursor(rows)
                 user_name = input().strip()
+
+                if user_name == ":q":
+                    select_module()
+                    return
                 continue
             else:
-                write("Wpisz hasło:")
+                write("Wpisz hasło: (lub :q, aby cofnąc)")
                 move_cursor(rows)
                 user_password = input().strip()
+
+                if user_password == ":q":
+                    user_name = None
+                    continue
 
                 if user_name and user_password:
                     user = next(
