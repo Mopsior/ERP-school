@@ -2,7 +2,17 @@ from typing import Callable, Any
 
 
 class MenuOption:
-    def __init__(self, name: str, fun: Callable | None = None, data: Any | None = None, hidden_from_list: bool = False, hidden_from_tabs: bool = False, selected: bool = False, should_rerender: bool = False):
+    def __init__(
+            self,
+            name: str,
+            fun: Callable | None = None,
+            data: Any | None = None,
+            hidden_from_list: bool = False,
+            hidden_from_tabs: bool = False,
+            selected: bool = False,
+            should_rerender: bool = False,
+            is_return: bool = False
+    ):
         self.name = name
         self.fun = fun
         self.data = data
@@ -10,6 +20,7 @@ class MenuOption:
         self.hidden_from_tabs = hidden_from_tabs
         self.selected = selected
         self.should_rerender = should_rerender
+        self.is_return = is_return
 
     def execute(self):
         return self.fun()

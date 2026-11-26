@@ -27,7 +27,7 @@ def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
         MenuOption('Użytkownicy', admin),
         MenuOption('Produkty', products_list, selected=True),
         MenuOption('Promocje', promotions_list),
-        MenuOption('<- Wróć', products_list, hidden_from_tabs=True)
+        MenuOption('<- Wróć', products_list, hidden_from_tabs=True, is_return=True)
     ]
 
     page_options: list[MenuOption] = []
@@ -37,7 +37,7 @@ def products_list(input_mode: AdminInputMode | None = AdminInputMode.SELECTING):
             page_options.append(MenuOption(product['name'], lambda i=i: product_details(i)))
 
     page_options.append(MenuOption('+ Dodaj produkt', create_product))
-    page_options.append(MenuOption('<- Wróć', products_list))
+    page_options.append(MenuOption('<- Wróć', products_list, is_return=True))
 
     error_message: str | None = None
 

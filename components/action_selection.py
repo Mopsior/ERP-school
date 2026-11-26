@@ -30,13 +30,24 @@ def action_selection(
 
     move_cursor(rows)
     if show_available_options:
-        write(f'Wprwoadź liczbę: ({get_available_options(len(options), selected_option)}) ')
+        with_is_return: bool = any(x.is_return for x in options)
+        write(f'{"Wprowadź:" if with_is_return else "Wprowadź liczbę:"} ({
+        get_available_options(sum(
+            1 for option in options if not option.hidden_from_list and not option.is_return),
+            selected_option,
+            with_is_return
+        )}) ')
     else:
         write('Wprwoadź liczbę: ')
 
     user_input = None
     try:
-        user_input = int_input(None)
+        user_input = input().strip()
+
+        if user_input == ":q":
+            return next((option for option in options if option.is_return), None), None
+
+        user_input = int(user_input)
 
         if user_input is None:
             raise TypeError
