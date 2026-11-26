@@ -11,11 +11,13 @@ from utils.terminal import clear_screen, move_cursor, write
 
 
 def promotion_details(promotion_id: int):
+    from modules.admin.update_promotion import update_promotion
+
     promotions = get_promotions()
     selected_promotion = promotions[promotion_id]
 
     action_options = [
-        MenuOption('Edytuj', lambda: promotion_details(promotion_id)),
+        MenuOption('Edytuj', lambda: update_promotion(promotion_id)),
         MenuOption('Usuń', lambda: remove_promotion(promotion_id)),
         MenuOption('<- Powrót', lambda : promotions_list(AdminInputMode.PAGE_CONTENT))
     ]
