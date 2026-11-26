@@ -15,6 +15,9 @@ def user_name_input(default_value: str | None = None) -> str:
     if len(user_input) > 64:
         raise TypeError('Nazwa użytkownika jest za długa')
 
+    if ":" in user_input:
+        raise TypeError('Nazwa użytkownika nie może zawierać znaku ":"')
+
     return user_input
 
 def user_role_input(roles_list: list[MenuOption], default_value: UserRole | None = None) -> UserRole:
