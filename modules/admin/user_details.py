@@ -2,12 +2,10 @@ import os
 
 from classes.input_mode import AdminInputMode
 from classes.menu_option import MenuOption
-from components.bottom_nav_list import bottom_nav_list
+from components.action_selection import action_selection
 from modules.admin.update_user import update_user
-from utils.get_available_options import get_available_options
 from utils.admin.get_users import get_users
-from utils.int_input import int_input
-from utils.terminal import clear_screen, move_cursor, write, from_bottom
+from utils.terminal import clear_screen, move_cursor, write
 from utils.admin.remove_user import remove_user
 
 
@@ -40,32 +38,10 @@ def user_details(user_id: int):
         move_cursor(5)
         write(f'Rola:   {selected_user['role']}')
 
-        move_cursor(from_bottom(rows, len(action_options) + 1))
-        write('Wybierz akcję:')
-        bottom_nav_list(action_options, rows)
+        selected_option, error_message = action_selection(
+            action_options, rows, 'Wybierz akcję:', error_message
+        )
 
-        if error_message:
-            move_cursor(from_bottom(rows, len(action_options) + 3))
-            write(error_message)
-
-        move_cursor(rows)
-        write(f'Wprwoadź liczbę: ({get_available_options(len(action_options))}) ')
-
-        user_input = None
-        try:
-            user_input = int_input(None)
-
-            if user_input is None:
-                raise TypeError
-
-            if user_input <= 0:
-                raise IndexError
-
-            selected_option = action_options[user_input - 1]
-        except (ValueError, TypeError):
-            error_message = 'To nie jest liczba! Wprowadź opcje ponownie'
-        except IndexError:
-            error_message = f'Nie ma opcji nr {user_input}'
-        else:
+        if selected_option:
             selected_option.execute()
             break

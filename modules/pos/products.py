@@ -3,13 +3,12 @@ import os
 from classes.menu_option import MenuOption
 from classes.pos_input_mode import POSInputMode
 from classes.product import Product
-from components.bottom_nav_list import bottom_nav_list
+from components.action_selection import action_selection
 from components.empty import empty
 from components.products_table import products_table
 from components.tabs import tabs
 from utils.admin.get_products import get_products
-from utils.int_input import int_input
-from utils.terminal import clear_screen, move_cursor, from_bottom, write
+from utils.terminal import clear_screen, move_cursor
 
 
 def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
@@ -69,33 +68,15 @@ def pos_products(input_mode: POSInputMode | None = POSInputMode.SELECTING):
             POSInputMode.PAGE_CONTENT: page_options
         }.get(input_mode)
 
-        bottom_list_length = bottom_nav_list(size_source, rows)
+        selected_option, error_message = action_selection(
+            size_source,
+            rows,
+            'Podaj numer produktu z tabeli lub wybierz opcję:',
+            error_message,
+            visible_options_only=True,
+            show_available_options=False
+        )
 
-        move_cursor(from_bottom(rows, bottom_list_length + 1))
-        write('Podaj numer produktu z tabeli lub wybierz opcję:')
-
-        if error_message:
-            move_cursor(from_bottom(rows, bottom_list_length + 3))
-            write(error_message)
-
-        move_cursor(rows)
-        write(f'Wprwoadź liczbę: ')
-
-        user_input = None
-        try:
-            user_input = int_input()
-
-            if user_input is None:
-                raise TypeError
-
-            if user_input <= 0:
-                raise IndexError
-
-            selected_option = size_source[user_input - 1]
-        except (ValueError, TypeError):
-            error_message = 'To nie jest liczba! Wprowadź opcje ponownie'
-        except IndexError:
-            error_message = f'Nie ma opcji nr {user_input}'
-        else:
+        if selected_option:
             selected_option.execute()
             if not selected_option.should_rerender: break

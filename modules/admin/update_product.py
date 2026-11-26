@@ -3,11 +3,10 @@ import os
 from classes.menu_option import MenuOption
 from classes.product import Product
 from classes.product_input_method import ProductInptuMethod
-from components.bottom_nav_list import bottom_nav_list
+from components.action_selection import action_selection
 from utils.admin.edit_product import edit_product
 from utils.admin.get_products import get_products
 from utils.admin.product_inputs import product_name_input, product_price_input, product_confirmation_input
-from utils.get_available_options import get_available_options
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
 
 
@@ -67,11 +66,7 @@ def update_product(product_id: int):
                 write(f'({product["price"]:.2f}): ')
             case ProductInptuMethod.CONFIRMATION:
                 error_row = len(confirmation_options) + 3
-                move_cursor(from_bottom(rows, len(confirmation_options) + 1))
-                write("Czy chcesz zapisać zmiany?")
-                bottom_nav_list(confirmation_options, rows)
-                move_cursor(rows)
-                write(f'Wprwoadź liczbę: ({get_available_options(len(confirmation_options))}) ')
+                action_selection(confirmation_options, rows, "Czy chcesz zapisać zmiany?")
 
         try:
             match product_input_method:

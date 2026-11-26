@@ -4,9 +4,8 @@ from classes.menu_option import MenuOption
 from classes.user import User
 from classes.user_data_input_method import UserDataInputMethod
 from classes.user_role import UserRole
-from components.bottom_nav_list import bottom_nav_list
+from components.action_selection import action_selection
 from utils.admin.add_user import add_user
-from utils.get_available_options import get_available_options
 from utils.terminal import clear_screen, move_cursor, write, from_bottom
 from utils.admin.user_data_inputs import user_name_input, user_role_input, user_password_input
 
@@ -59,12 +58,8 @@ def create_user():
             move_cursor(rows)
         elif user_data_input_method is UserDataInputMethod.ROLE:
             error_row = len(user_roles_list) + 3
-            move_cursor(from_bottom(rows, len(user_roles_list) + 1))
-            write("Wprowadź rolę użytkownika:")
-            bottom_nav_list(user_roles_list, rows)
             input_method = lambda: user_role_input(user_roles_list)
-            move_cursor(rows)
-            write(f'Wprwoadź liczbę: ({get_available_options(len(user_roles_list))}) ')
+            action_selection(user_roles_list, rows, "Wprowadź rolę użytkownika:")
         elif user_data_input_method is UserDataInputMethod.PASSWORD:
             error_row = 3
             move_cursor(from_bottom(rows, 1))
